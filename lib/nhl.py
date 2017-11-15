@@ -43,10 +43,10 @@ def get_opposition_id(team_id):
         gameinfo_payload = requests.get(url)
         gameinfo_payload = gameinfo_payload.json()
         if int(team_id) == int(gameinfo_payload['dates'][0]['games'][0]['teams']['home']['team']['id']):
-            opposition_id = int(gameinfo_payload['dates'][0]['games'][0]['teams']['home']['away']['id'])
+            opposition_id = int(gameinfo_payload['dates'][0]['games'][0]['teams']['away']['team']['id'])
         else:
             opposition_id = int(gameinfo_payload['dates'][0]['games'][0]['teams']['home']['team']['id'])
-        
+
         return opposition_id
     except requests.exceptions.RequestException:
         print("Error encountered, returning 0 for opposition_id")

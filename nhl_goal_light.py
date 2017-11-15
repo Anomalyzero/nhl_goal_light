@@ -86,6 +86,8 @@ if __name__ == "__main__":
 
     old_score = 0
     new_score = 0
+    old_opposition_score = 0
+    new_opposition_score = 0
     gameday = False
     season = False
 
@@ -119,7 +121,7 @@ if __name__ == "__main__":
                         new_opposition_score = nhl.fetch_score(opposition_id)
 
                         # If score change...
-                        if new_opposition_score > old_opposition_score:
+                        if new_opposition_score != old_opposition_score:
                             print("Opposition Score")
                             print(new_opposition_score)
 
