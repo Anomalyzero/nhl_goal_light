@@ -52,7 +52,7 @@ def fetch_score(team_id):
             score = int(score['dates'][0]['games'][0]['teams']['away']['score'])
 
         # Print score for test
-        print("Score: {0} Time: {1}:{2}:{3}".format(score, now.hour, now.minute, now.second))
+        print("Team {4} Score: {0} Time: {1}:{2}:{3}".format(score, now.hour, now.minute, now.second, team_id  ))
         return score
     except requests.exceptions.RequestException:
         print("Error encountered, returning 0 for score")

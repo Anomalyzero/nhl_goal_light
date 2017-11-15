@@ -46,7 +46,7 @@ def setup_nhl():
     lines = ""
     team = ""
     team_id = ""
-    settings_file = '/home/pi/nhl_goal_light/settings.txt'
+    settings_file = '{0}/settings.txt'.format(main_dir)
     if os.path.exists(settings_file):
         # get settings from file
         f = open(settings_file, 'r')
@@ -81,6 +81,8 @@ def setup_nhl():
 
 
 if __name__ == "__main__":
+
+    main_dir = os.path.dirname(os.path.realpath(__file__))
 
     old_score = 0
     new_score = 0
@@ -121,7 +123,8 @@ if __name__ == "__main__":
                                 # save new score
                                 print("GOAL!")
                                 # activate_goal_light()
-                                light.activate_goal_light()
+                                light.writeScore(new_score)
+                                light.activate_goal_light(main_dir = main_dir)
                             old_score = new_score
                             
 
