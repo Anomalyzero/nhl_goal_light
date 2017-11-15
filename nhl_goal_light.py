@@ -110,13 +110,19 @@ if __name__ == "__main__":
                     
                     # check end of game
                     game_end = nhl.check_game_end(team_id)
+                    opposition_id = nhl.get_opposition_id(team_id)
                     
                     if not game_end:
             
                         # Check score online and save score
                         new_score = nhl.fetch_score(team_id)
+                        new_opposition_score = nhl.fetch_score(opposition_id)
 
                         # If score change...
+                        if new_opposition_score > old_opposition_score:
+                            print("Opposition Score")
+                            print(new_opposition_score)
+
                         if new_score != old_score:
                             time.sleep(delay) 
                             if new_score > old_score:
@@ -126,6 +132,7 @@ if __name__ == "__main__":
                                 light.writeScore(new_score)
                                 light.activate_goal_light(main_dir = main_dir)
                             old_score = new_score
+                            old_opposition_score = new_opposition_score
                             
 
                     else:

@@ -33,6 +33,51 @@ def get_team_id(team_name):
     raise Exception("Could not find ID for team {0}".format(team_name))
 
 
+def get_opposition_id(team_id):
+    """ Function to get team_id of opposition"""
+
+    opposition_id = 0
+    url = '{0}schedule?teamId={1}'.format(NHL_API_URL, team_id)
+    
+    try:
+        gameinfo_payload = requests.get(url)
+        gameinfo_payload = gameinfo_payload.json()
+        if int(team_id) == int(gameinfo_payload['dates'][0]['games'][0]['teams']['home']['team']['id']):
+            opposition_id = gameinfo_payload['dates'][0]['games'][0]['teams']['home']['away']['id']
+        else:
+            opposition_id = gameinfo_payload['dates'][0]['games'][0]['teams']['home']['team']['id']
+        
+        return opposition_id
+    except requests.exceptions.RequestException:
+        print("Error encountered, returning 0 for opposition_id")
+        return 0
+
+
+def get_opposition_score(opposition_id):
+    """ Function to get the score of the opposing team"""
+
+    # Get current time
+    now = datetime.datetime.now()
+
+    # Set URL depending on team selected
+    url = '{0}schedule?teamId={1}'.format(NHL_API_URL, opposition_id)
+    # Avoid request errors (might still not catch errors)
+    try:
+        score = requests.get(url)
+        score = score.json()
+        if int(opposition_id) == int(score['dates'][0]['games'][0]['teams']['home']['team']['id']):
+            score = int(score['dates'][0]['games'][0]['teams']['home']['score'])
+        else:
+            score = int(score['dates'][0]['games'][0]['teams']['away']['score'])
+
+        # Print score for test
+        print("Opposing Team {4} Score: {0} Time: {1}:{2}:{3}".format(score, now.hour, now.minute, now.second, opposition_id  ))
+        return score
+    except requests.exceptions.RequestException:
+        print("Error encountered, returning 0 for score")
+        return 0
+
+
 def fetch_score(team_id):
     """ Function to get the score of the game depending on the chosen team.
     Inputs the team ID and returns the score found on web. """
