@@ -33,7 +33,7 @@ def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
     GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW) # Tell the program you want to use pin number 7 as output. Relay is ACTIVE LOW, so OFF is HIGH
-    GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set GPIO 15 as a PULL DOWN switch
+    #GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set GPIO 15 as a PULL DOWN switch
     GPIO.add_event_detect(15, GPIO.RISING, activate_goal_light, 5000)
     GPIO.setup(HAWKS_A, GPIO.OUT, initial=GPIO.HIGH)
     GPIO.setup(HAWKS_B, GPIO.OUT, initial=GPIO.HIGH)
