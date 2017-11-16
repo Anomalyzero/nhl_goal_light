@@ -123,7 +123,7 @@ if __name__ == "__main__":
                         # If score change...
                         if new_opposition_score != old_opposition_score:
                             print("Opposition Scores: {0}".format(new_opposition_score))
-                            writeOppositionScore(new_opposition_score)
+                            light.writeOppositionScore(new_opposition_score)
 
                         if new_score != old_score:
                             time.sleep(delay) 
