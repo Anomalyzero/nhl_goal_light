@@ -11,13 +11,20 @@ else :
     from lib import gpio_mock as GPIO
 
 
-A=16
-B=18
-C=22
-D=32
-E=36
-F=38
-G=40
+HAWKS_A=16
+HAWKS_B=18
+HAWKS_C=22
+HAWKS_D=32
+HAWKS_E=36
+HAWKS_F=38
+HAWKS_G=40
+OPPOSITION_A=13
+OPPOSITION_B=15
+OPPOSITION_C=29
+OPPOSITION_D=31
+OPPOSITION_E=33
+OPPOSITION_F=35
+OPPOSITION_G=37
 
 def setup():
     """ Function to setup raspberry pi GPIO mode and warnings. PIN 7 OUT and PIN 15 IN """
@@ -28,13 +35,20 @@ def setup():
     GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW) # Tell the program you want to use pin number 7 as output. Relay is ACTIVE LOW, so OFF is HIGH
     GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set GPIO 15 as a PULL DOWN switch
     GPIO.add_event_detect(15, GPIO.RISING, activate_goal_light, 5000)
-    GPIO.setup(A, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(B, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(C, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(D, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(E, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(F, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(G, GPIO.OUT, initial=GPIO.LOW)
+    GPIO.setup(HAWKS_A, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(HAWKS_B, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(HAWKS_C, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(HAWKS_D, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(HAWKS_E, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(HAWKS_F, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(HAWKS_G, GPIO.OUT, initial=GPIO.LOW)
+    GPIO.setup(OPPOSITION_A, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(OPPOSITION_B, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(OPPOSITION_C, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(OPPOSITION_D, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(OPPOSITION_E, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(OPPOSITION_F, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(OPPOSITION_G, GPIO.OUT, initial=GPIO.LOW)
 
 
 def writeScore(score):
@@ -60,104 +74,227 @@ def writeScore(score):
 		write9()
 
 
+def writeOppositionScore(score):
+	if score == 0:
+		write0_OPP()
+	if score == 1:
+		write1_OPP()
+	if score == 2:
+		write2_OPP()
+	if score == 3:
+		write3_OPP()
+	if score == 4:
+		write4_OPP()
+	if score == 5:
+		write5_OPP()
+	if score == 6:
+		write6_OPP()
+	if score == 7:
+		write7_OPP()
+	if score == 8:
+		write8_OPP()
+	if score == 9:
+		write9_OPP()
+
+
 def write0():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.HIGH)
-	GPIO.output(E, GPIO.HIGH)
-	GPIO.output(F, GPIO.HIGH)
-	GPIO.output(G, GPIO.LOW)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.HIGH)
+	GPIO.output(HAWKS_E, GPIO.HIGH)
+	GPIO.output(HAWKS_F, GPIO.HIGH)
+	GPIO.output(HAWKS_G, GPIO.LOW)
 
 
 def write1():
-	GPIO.output(A, GPIO.LOW)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.LOW)
-	GPIO.output(E, GPIO.LOW)
-	GPIO.output(F, GPIO.LOW)
-	GPIO.output(G, GPIO.LOW)
+	GPIO.output(HAWKS_A, GPIO.LOW)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.LOW)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.LOW)
+	GPIO.output(HAWKS_G, GPIO.LOW)
 
 
 def write2():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.LOW)
-	GPIO.output(D, GPIO.HIGH)
-	GPIO.output(E, GPIO.HIGH)
-	GPIO.output(F, GPIO.LOW)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.LOW)
+	GPIO.output(HAWKS_D, GPIO.HIGH)
+	GPIO.output(HAWKS_E, GPIO.HIGH)
+	GPIO.output(HAWKS_F, GPIO.LOW)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
 
 
 def write3():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.HIGH)
-	GPIO.output(E, GPIO.LOW)
-	GPIO.output(F, GPIO.LOW)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.HIGH)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.LOW)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
 
 
 def write4():
-	GPIO.output(A, GPIO.LOW)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.LOW)
-	GPIO.output(E, GPIO.LOW)
-	GPIO.output(F, GPIO.HIGH)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.LOW)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.LOW)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.HIGH)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
 
 
 def write5():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.LOW)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.HIGH)
-	GPIO.output(E, GPIO.LOW)
-	GPIO.output(F, GPIO.HIGH)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.LOW)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.HIGH)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.HIGH)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
 
 
 def write6():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.LOW)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.HIGH)
-	GPIO.output(E, GPIO.HIGH)
-	GPIO.output(F, GPIO.HIGH)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.LOW)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.HIGH)
+	GPIO.output(HAWKS_E, GPIO.HIGH)
+	GPIO.output(HAWKS_F, GPIO.HIGH)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
 
 
 def write7():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.LOW)
-	GPIO.output(E, GPIO.LOW)
-	GPIO.output(F, GPIO.LOW)
-	GPIO.output(G, GPIO.LOW)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.LOW)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.LOW)
+	GPIO.output(HAWKS_G, GPIO.LOW)
 
 
 def write8():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.HIGH)
-	GPIO.output(E, GPIO.HIGH)
-	GPIO.output(F, GPIO.HIGH)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.HIGH)
+	GPIO.output(HAWKS_E, GPIO.HIGH)
+	GPIO.output(HAWKS_F, GPIO.HIGH)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
 
 
 def write9():
-	GPIO.output(A, GPIO.HIGH)
-	GPIO.output(B, GPIO.HIGH)
-	GPIO.output(C, GPIO.HIGH)
-	GPIO.output(D, GPIO.LOW)
-	GPIO.output(E, GPIO.LOW)
-	GPIO.output(F, GPIO.HIGH)
-	GPIO.output(G, GPIO.HIGH)
+	GPIO.output(HAWKS_A, GPIO.HIGH)
+	GPIO.output(HAWKS_B, GPIO.HIGH)
+	GPIO.output(HAWKS_C, GPIO.HIGH)
+	GPIO.output(HAWKS_D, GPIO.LOW)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.HIGH)
+	GPIO.output(HAWKS_G, GPIO.HIGH)
+
+
+def write0_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.HIGH)
+	GPIO.output(OPPOSITION_E, GPIO.HIGH)
+	GPIO.output(OPPOSITION_F, GPIO.HIGH)
+	GPIO.output(OPPOSITION_G, GPIO.LOW)
+
+
+def write1_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.LOW)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.LOW)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.LOW)
+	GPIO.output(OPPOSITION_G, GPIO.LOW)
+
+
+def write2_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.LOW)
+	GPIO.output(OPPOSITION_D, GPIO.HIGH)
+	GPIO.output(OPPOSITION_E, GPIO.HIGH)
+	GPIO.output(OPPOSITION_F, GPIO.LOW)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
+
+
+def write3_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.HIGH)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.LOW)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
+
+
+def write4_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.LOW)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.LOW)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.HIGH)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
+
+
+def write5_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.LOW)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.HIGH)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.HIGH)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
+
+
+def write6_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.LOW)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.HIGH)
+	GPIO.output(OPPOSITION_E, GPIO.HIGH)
+	GPIO.output(OPPOSITION_F, GPIO.HIGH)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
+
+
+def write7_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.LOW)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.LOW)
+	GPIO.output(OPPOSITION_G, GPIO.LOW)
+
+
+def write8_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.HIGH)
+	GPIO.output(OPPOSITION_E, GPIO.HIGH)
+	GPIO.output(OPPOSITION_F, GPIO.HIGH)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
+
+
+def write9_OPP():
+	GPIO.output(OPPOSITION_A, GPIO.HIGH)
+	GPIO.output(OPPOSITION_B, GPIO.HIGH)
+	GPIO.output(OPPOSITION_C, GPIO.HIGH)
+	GPIO.output(OPPOSITION_D, GPIO.LOW)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.HIGH)
+	GPIO.output(OPPOSITION_G, GPIO.HIGH)
 
 
 def activate_goal_light(main_dir, gpio_event_var=0):
