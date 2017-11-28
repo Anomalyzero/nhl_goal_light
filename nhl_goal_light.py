@@ -119,6 +119,8 @@ if __name__ == "__main__":
                         # Check score online and save score
                         new_score = nhl.fetch_score(team_id)
                         new_opposition_score = nhl.fetch_score(opposition_id)
+                        light.writeScore(new_score)
+                        light.writeOppositionScore(new_opposition_score)
 
                         # If score change...
                         if new_opposition_score != old_opposition_score:
@@ -140,6 +142,9 @@ if __name__ == "__main__":
                     else:
                         print("Game Over!")
                         old_score = 0 # Reset for new game
+                        old_opposition_score = 0
+                        sleep(300) # Sleep for 5 minutes, then clear scoreboard
+                        light.shutdownScoreboard()
                         sleep("day")  # sleep till tomorrow
                 else:
                     print("No Game Today!")

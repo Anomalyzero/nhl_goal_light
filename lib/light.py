@@ -34,7 +34,7 @@ def setup():
     GPIO.setwarnings(False)
     GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW) # Tell the program you want to use pin number 7 as output. Relay is ACTIVE LOW, so OFF is HIGH
     #GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set GPIO 15 as a PULL DOWN switch
-    GPIO.add_event_detect(15, GPIO.RISING, activate_goal_light, 5000)
+    #GPIO.add_event_detect(15, GPIO.RISING, activate_goal_light, 5000)
     GPIO.setup(HAWKS_A, GPIO.OUT, initial=GPIO.HIGH)
     GPIO.setup(HAWKS_B, GPIO.OUT, initial=GPIO.HIGH)
     GPIO.setup(HAWKS_C, GPIO.OUT, initial=GPIO.HIGH)
@@ -95,6 +95,23 @@ def writeOppositionScore(score):
 		write8_OPP()
 	if score == 9:
 		write9_OPP()
+
+
+def shutdownScoreboard():
+	GPIO.output(HAWKS_A, GPIO.LOW)
+	GPIO.output(HAWKS_B, GPIO.LOW)
+	GPIO.output(HAWKS_C, GPIO.LOW)
+	GPIO.output(HAWKS_D, GPIO.LOW)
+	GPIO.output(HAWKS_E, GPIO.LOW)
+	GPIO.output(HAWKS_F, GPIO.LOW)
+	GPIO.output(HAWKS_G, GPIO.LOW)
+	GPIO.output(OPPOSITION_A, GPIO.LOW)
+	GPIO.output(OPPOSITION_B, GPIO.LOW)
+	GPIO.output(OPPOSITION_C, GPIO.LOW)
+	GPIO.output(OPPOSITION_D, GPIO.LOW)
+	GPIO.output(OPPOSITION_E, GPIO.LOW)
+	GPIO.output(OPPOSITION_F, GPIO.LOW)
+	GPIO.output(OPPOSITION_G, GPIO.LOW)
 
 
 def write0():
