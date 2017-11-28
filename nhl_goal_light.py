@@ -9,7 +9,7 @@ from lib import nhl
 from lib import light
 
 RESTART_INGAME=False
-if "restart" in sys.argv
+if sys.argv[1] is "restart"
     print("Restarting...")
     RESTART_INGAME=True
 
