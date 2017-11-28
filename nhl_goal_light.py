@@ -4,9 +4,14 @@ import datetime
 import time
 import os
 import requests
+import sys
 from lib import nhl
 from lib import light
 
+RESTART_INGAME=False
+if "restart" in sys.argv
+    print("Restarting...")
+    RESTART_INGAME=True
 
 def sleep(sleep_period):
     """ Function to sleep if not in season or no game.
@@ -134,7 +139,11 @@ if __name__ == "__main__":
                                 print("GOAL!")
                                 # activate_goal_light()
                                 light.writeScore(new_score)
-                                light.activate_goal_light(main_dir = main_dir)
+                                    if not RESTART_INGAME:
+                                        light.activate_goal_light(main_dir = main_dir)
+                                    else:
+                                        RESTART_INGAME=False # Reset RESTART_INGAME to false so we don't skip anymore goals
+
                             old_score = new_score
                             old_opposition_score = new_opposition_score
                             
