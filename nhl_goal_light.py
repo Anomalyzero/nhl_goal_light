@@ -9,7 +9,7 @@ from lib import nhl
 from lib import light
 
 RESTART_INGAME=False
-if sys.argv[1] is "restart":
+if len(sys.argv) >= 2 and sys.argv[1] is "restart":
     print("Restarting scorboard, initial goal horn will not sound")
     RESTART_INGAME=True
 
