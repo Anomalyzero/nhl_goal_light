@@ -9,9 +9,11 @@ from lib import nhl
 from lib import light
 
 RESTART_INGAME=False
-if len(sys.argv) >= 2 and sys.argv[1] is "restart":
+arg_len = len(sys.argv)
+if arg_len >= 2 and sys.argv[1] == "restart":
     print("Restarting scorboard, initial goal horn will not sound")
     RESTART_INGAME=True
+
 
 def sleep(sleep_period):
     """ Function to sleep if not in season or no game.
@@ -152,7 +154,7 @@ if __name__ == "__main__":
                         print("Game Over!")
                         old_score = 0 # Reset for new game
                         old_opposition_score = 0
-                        sleep(300) # Sleep for 5 minutes, then clear scoreboard
+                        time.sleep(300) # Sleep for 5 minutes, then clear scoreboard
                         light.shutdownScoreboard()
                         sleep("day")  # sleep till tomorrow
                 else:
