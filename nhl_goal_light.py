@@ -154,7 +154,7 @@ if __name__ == "__main__":
                         print("Game Over!")
                         old_score = 0 # Reset for new game
                         old_opposition_score = 0
-                        time.sleep(300) # Sleep for 5 minutes, then clear scoreboard
+                        time.sleep(3600) # Sleep for 5 minutes, then clear scoreboard
                         light.shutdownScoreboard()
                         sleep("day")  # sleep till tomorrow
                 else:
