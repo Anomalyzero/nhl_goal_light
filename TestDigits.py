@@ -2,6 +2,7 @@
 import random
 import os
 import platform
+import time
 
 if "armv" in platform.machine() :
     # import GPIO if running on RPI
@@ -314,20 +315,48 @@ def write9_OPP():
 	GPIO.output(OPPOSITION_G, GPIO.HIGH)
 
 
-def activate_goal_light(main_dir, gpio_event_var=0):
-    """ Function to activate GPIO for goal light and plar random audio clip. """
-
-    songrandom = random.randint(1, 3) #Set random numbers depending on number of audio clips available
-    # Prepare commande to play sound (change file name if needed)
-    command_play_song = 'sudo mpg123 -q {directory}/audio/goal_horn_{SongId}.mp3'.format(directory=main_dir,SongId=str(songrandom))
-    os.system(command_play_song) # Play sound
-    GPIO.output(7, GPIO.LOW) #Turn off light
-
-
-def cleanup():
-    """ Function to cleanup raspberry pi GPIO at end of code """
-
-    # Restore GPIO to default state
-    GPIO.remove_event_detect(15) #Add to end of function
-    GPIO.cleanup()
-    print("GPIO cleaned!")
+	
+print("Testing Scoreboard Digits...")
+setup()
+print("0")
+write0_OPP()
+write0()
+time.sleep(1)
+print("1")
+write1_OPP()
+write1()
+time.sleep(1)
+print("2")
+write2_OPP()
+write2()
+time.sleep(1)
+print("3")
+write3_OPP()
+write3()
+time.sleep(1)
+print("4")
+write4_OPP()
+write4()
+time.sleep(1)
+print("5")
+write5_OPP()
+write5()
+time.sleep(1)
+print("6")
+write6_OPP()
+write6()
+time.sleep(1)
+print("7")
+write7_OPP()
+write7()
+time.sleep(1)
+print("8")
+write8_OPP()
+write8()
+time.sleep(1)
+print("9")
+write9_OPP()
+write9()
+time.sleep(1)
+print("Testing finished")
+shutdownScoreboard()

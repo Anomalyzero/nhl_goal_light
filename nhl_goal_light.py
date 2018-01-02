@@ -4,8 +4,15 @@ import datetime
 import time
 import os
 import requests
+import sys
 from lib import nhl
 from lib import light
+
+RESTART_INGAME=False
+arg_len = len(sys.argv)
+if arg_len >= 2 and sys.argv[1] == "restart":
+    print("Restarting scorboard, initial goal horn will not sound")
+    RESTART_INGAME=True
 
 
 def sleep(sleep_period):
@@ -46,7 +53,7 @@ def setup_nhl():
     lines = ""
     team = ""
     team_id = ""
-    settings_file = '/home/pi/nhl_goal_light/settings.txt'
+    settings_file = '{0}/settings.txt'.format(main_dir)
     if os.path.exists(settings_file):
         # get settings from file
         f = open(settings_file, 'r')
@@ -82,8 +89,12 @@ def setup_nhl():
 
 if __name__ == "__main__":
 
+    main_dir = os.path.dirname(os.path.realpath(__file__))
+
     old_score = 0
     new_score = 0
+    old_opposition_score = 0
+    new_opposition_score = 0
     gameday = False
     season = False
 
@@ -108,26 +119,43 @@ if __name__ == "__main__":
                     
                     # check end of game
                     game_end = nhl.check_game_end(team_id)
+                    opposition_id = nhl.get_opposition_id(team_id)
                     
                     if not game_end:
             
                         # Check score online and save score
                         new_score = nhl.fetch_score(team_id)
+                        new_opposition_score = nhl.fetch_score(opposition_id)
+                        light.writeScore(new_score)
+                        light.writeOppositionScore(new_opposition_score)
 
                         # If score change...
+                        if new_opposition_score != old_opposition_score:
+                            print("Opposition Scores: {0}".format(new_opposition_score))
+                            light.writeOppositionScore(new_opposition_score)
+
                         if new_score != old_score:
                             time.sleep(delay) 
                             if new_score > old_score:
                                 # save new score
                                 print("GOAL!")
                                 # activate_goal_light()
-                                light.activate_goal_light()
+                                light.writeScore(new_score)
+                                if not RESTART_INGAME:
+                                    light.activate_goal_light(main_dir = main_dir)
+                                else:
+                                    RESTART_INGAME=False # Reset RESTART_INGAME to false so we don't skip anymore goals
+
                             old_score = new_score
+                            old_opposition_score = new_opposition_score
                             
 
                     else:
                         print("Game Over!")
                         old_score = 0 # Reset for new game
+                        old_opposition_score = 0
+                        time.sleep(3600) # Sleep for 5 minutes, then clear scoreboard
+                        light.shutdownScoreboard()
                         sleep("day")  # sleep till tomorrow
                 else:
                     print("No Game Today!")
