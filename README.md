@@ -1,6 +1,7 @@
 # nhl_scoreboard
 NHL Scoreboard project for use with Raspberry Pi. This project was shamelessly forked for use in a gift for a family member.
-The project uses arim215's NHL Goal Light project as a backbone, and expands it by allowing control of 2 Seven Segment displays like [these](http://www.kingbrightusa.com/product.asp?catalog_name=LED&product_id=SA40-19EWA)
+The project uses arim215's NHL Goal Light project as a backbone, and expands it by allowing control of 2 Seven Segment displays like [these](http://www.kingbrightusa.com/product.asp?catalog_name=LED&product_id=SA40-19EWA).
+
 These displays need more current (and voltage) than the maximum 57ma that can be provided by the GPIO, so a custom circuit is needed to control the displays via the GPIO. This circuit uses transistors to provide current from a larger supply. A circuit schematic will be added soon.
 
 The rest of this README document is the original from arim215's project. Later, I will clean up this README and make it more specific to this project. Or I'll forget about it ¯\_(ツ)_/¯
